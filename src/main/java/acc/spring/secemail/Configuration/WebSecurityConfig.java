@@ -1,6 +1,6 @@
 package acc.spring.secemail.Configuration;
 
-import acc.spring.secemail.Service.UserServiceSecurity;
+import acc.spring.secemail.Configuration.security.UserServiceSecurity;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

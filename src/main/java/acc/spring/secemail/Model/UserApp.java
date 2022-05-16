@@ -3,13 +3,7 @@ package acc.spring.secemail.Model;
 import java.util.Collection;
 import java.util.Collections;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -33,15 +27,16 @@ public class UserApp implements UserDetails {
         strategy = GenerationType.SEQUENCE, 
         generator = "user_id_sequence")
     private Long id;
-    private String name;
-    private String username;
+    private String firstname;
+    private String lastname;
     private String email;
     private String password;
 
     @Enumerated(EnumType.STRING)
     private UserRole userole;
-    
+
     private Boolean locked;
+
     private Boolean enabled;
 
     @Override
@@ -57,7 +52,7 @@ public class UserApp implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
 
     @Override

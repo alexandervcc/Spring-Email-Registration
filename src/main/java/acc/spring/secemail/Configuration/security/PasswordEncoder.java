@@ -1,4 +1,4 @@
-package acc.spring.secemail.Configuration;
+package acc.spring.secemail.Configuration.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
