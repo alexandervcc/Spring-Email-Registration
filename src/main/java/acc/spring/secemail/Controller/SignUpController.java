@@ -1,10 +1,7 @@
 package acc.spring.secemail.Controller;
 
 import acc.spring.secemail.Service.RegistrationService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import acc.spring.secemail.DTO.SignUpReq;
 import lombok.AllArgsConstructor;
@@ -19,5 +16,10 @@ public class SignUpController {
     @PostMapping("/")
     public String postSignup(@RequestBody SignUpReq signupreq){
         return registrationService.register(signupreq);
+    }
+
+    @GetMapping(path = "/confirm")
+    public String getConfirmUser(@RequestParam("token") String token){
+        return registrationService.confirmToken(token);
     }
 }
