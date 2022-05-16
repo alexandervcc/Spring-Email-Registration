@@ -6,8 +6,11 @@ import acc.spring.secemail.DTO.SignUpReq;
 import acc.spring.secemail.Model.ConfirmationToken;
 import acc.spring.secemail.Model.UserApp;
 import acc.spring.secemail.Model.UserRole;
+import acc.spring.secemail.mail.EmailService;
 import acc.spring.secemail.mail.IEmailSender;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +23,8 @@ public class RegistrationService {
     private final UserServiceSecurity userServiceSecurity;
     private final ConfirmationTokenService confirmationTokenService;
     private final EmailValidator emailValidator;
-    private final IEmailSender emailSender;
     private final String LINK = "http://localhost:8080/api/signup/confirm?token=";
+    private final EmailService emailService;
 
     public String register(SignUpReq signUpReq){
         boolean isValid = emailValidator.test(signUpReq.getEmail());
@@ -41,14 +44,14 @@ public class RegistrationService {
                 .build()
         );
 
-
-        emailSender.send(
+        emailService.send(
             signUpReq.getEmail(),
             buildEmail(
                 signUpReq.getFirstName(),
                 LINK+token
             )
         );
+
 
         return token;
     }
